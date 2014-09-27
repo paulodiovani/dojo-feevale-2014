@@ -14,6 +14,7 @@ import java.util.ListIterator;
 /**
  *
  * @author Carlos
+ * @author Paulo Diovani
  */
 public class Lista<T> implements List {
     private Node<T> primeiro = null;

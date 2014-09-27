@@ -9,6 +9,7 @@ package dojo.java;
 /**
  *
  * @author Carlos
+ * @author Paulo Diovani
  */
 public class Node<T> {
     private Node anterior = null;
