@@ -6,13 +6,7 @@
 
 package br.feevale;
 
-/**
- *
- * @author Carlos
- * @author Paulo Diovani
- */
 public class Node<T> {
-    private Node anterior = null;
     private T conteudo;
     private Node proximo = null;
     
@@ -23,11 +17,7 @@ public class Node<T> {
     public T getConteudo() {
         return this.conteudo;
     }
-    
-    public String toString(){
-        return conteudo.toString();
-    }
-    
+
     public void setProximo(Node<T> e) {
         this.proximo = e;
     }
