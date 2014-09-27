@@ -16,8 +16,12 @@ public class Node<T> {
     private T conteudo;
     private Node proximo = null;
     
-    public void adicionaConteudo(T e) {
+    public void setConteudo(T e) {
         this.conteudo = e;
+    }
+
+    public T getConteudo() {
+        return this.conteudo;
     }
     
     public String toString(){

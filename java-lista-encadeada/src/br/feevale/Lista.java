@@ -56,10 +56,9 @@ public class Lista<T> implements List {
 
     @Override
     public boolean add(Object e) {
-        Node<T> nodo = new Node();
-        nodo.adicionaConteudo((T)e);
+        Node<T> nodo = new Node<T>();
+        nodo.setConteudo((T) e);
         this.tamanho ++;
-        
         
         if(primeiro == null){
             primeiro = nodo;
@@ -103,43 +102,48 @@ public class Lista<T> implements List {
 
     @Override
     public void clear() {
-        
-        while( primeiro.getProximo()!=null){
-            primeiro = primeiro.getProximo();
-        }
-        primeiro = null;
-        tamanho = 0;
+        this.primeiro = null;
+        this.ultimo   = null;
+        this.tamanho  = 0;
     }
 
     @Override
     public Object get(int i) {
-        if(i < 0){
+        if (i < 0) {
             return null;
         }
+
         Node<T> atual = primeiro;
-        for(int y = 0; y < this.size();y++){
-            if(y == i){
-                return atual;
+        for (int y = 0; y < this.size(); y++) {
+            if (y == i){
+                return atual.getConteudo();
             }
             atual = atual.getProximo();
         }
+
         return null;
     }
 
     @Override
     public Object set(int i, Object e) {
-         for(int j = 0; j < this.tamanho; j++) {
-            if(j == i){
-                Node<T> atual = (Node<T>)this.get(i);
-                Node<T> velho = atual;
-                Node<T> anterior = (Node<T>)this.get(i - 1);
-                atual = new Node();
-                atual.adicionaConteudo((T)e);
-                anterior.setProximo(atual);
-                return velho;
-            } 
+        if (i < 0){
+            return null;
         }
-        return false;
+
+        T conteudo;
+        Node<T> atual = primeiro;
+
+        for (int y = 0; y < this.size(); y++){
+            if (y == i){
+                conteudo = atual.getConteudo();
+                atual.setConteudo((T) e);
+                return conteudo;
+            }
+
+            atual = atual.getProximo();
+        }
+
+        return null;
     }
 
     @Override
@@ -148,22 +152,28 @@ public class Lista<T> implements List {
     }
 
     @Override
-    public Object remove(int i) { 
-        for(int j = 0; j < this.tamanho; j++) {
-            if(j == i){
-                Node<T> atual = (Node<T>)this.get(i);
-                Node<T> anterior = (Node<T>)this.get(i - 1);
-                
-                if(anterior != null) {
-                    anterior.setProximo(atual.getProximo());
-                }
-                tamanho--;
-                return atual;
-                
-                
-            } 
+    public Object remove(int i) {
+        int j = 0;
+        Node<T> atual    = this.primeiro;
+        Node<T> anterior = null;
+
+        while (atual != null) {
+            if (i == j) {
+                if (i == 0) this.primeiro = atual.getProximo();
+                else anterior.setProximo(atual.getProximo());
+
+                if (atual == this.ultimo) this.ultimo = anterior;
+
+                this.tamanho--;
+                return atual.getConteudo();
+            }
+
+            anterior = atual;
+            atual    = anterior.getProximo();
+            j++;
         }
-        return false;
+
+        return null;
     }
 
     @Override
@@ -190,5 +200,4 @@ public class Lista<T> implements List {
     public List subList(int i, int i1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
