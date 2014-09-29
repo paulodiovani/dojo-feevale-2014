@@ -9,7 +9,7 @@ package br.feevale;
 public class Node<T> {
     private T conteudo;
     private Node proximo = null;
-    
+
     public void setConteudo(T e) {
         this.conteudo = e;
     }
@@ -21,7 +21,7 @@ public class Node<T> {
     public void setProximo(Node<T> e) {
         this.proximo = e;
     }
-    
+
     public Node<T> getProximo() {
         return this.proximo;
     }

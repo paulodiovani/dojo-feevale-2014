@@ -12,10 +12,11 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class Lista<T> implements List {
+
     private Node<T> primeiro = null;
     private Node<T> ultimo = null;
     private int tamanho = 0;
-    
+
     @Override
     public int size() {
         return tamanho;
@@ -23,25 +24,27 @@ public class Lista<T> implements List {
 
     @Override
     public boolean isEmpty() {
-        if (tamanho == 0){
-            return true;
+        return tamanho == 0;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        for(int cnt = 0; cnt < this.size(); cnt++) {
+            if(this.get(cnt).toString().equals(o)){
+                return true;
+            }
         }
         return false;
     }
 
     @Override
-    public boolean contains(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Iterator iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Iterator) this;
     }
 
     @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Object[]) this.toArray();
     }
 
     @Override
@@ -53,21 +56,27 @@ public class Lista<T> implements List {
     public boolean add(Object e) {
         Node<T> nodo = new Node<T>();
         nodo.setConteudo((T) e);
-        this.tamanho ++;
-        
-        if(primeiro == null){
+
+        if (primeiro == null) {
             primeiro = nodo;
         } else {
             ultimo.setProximo(nodo);
         }
-        
+
         ultimo = nodo;
+        this.tamanho++;
         return true;
     }
 
     @Override
     public boolean remove(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(int cnt = 0; cnt < this.size(); cnt++) {
+            if(this.get(cnt).toString().equals(o)){
+                this.remove(o);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -98,8 +107,8 @@ public class Lista<T> implements List {
     @Override
     public void clear() {
         this.primeiro = null;
-        this.ultimo   = null;
-        this.tamanho  = 0;
+        this.ultimo = null;
+        this.tamanho = 0;
     }
 
     @Override
@@ -110,7 +119,7 @@ public class Lista<T> implements List {
 
         Node<T> atual = primeiro;
         for (int y = 0; y < this.size(); y++) {
-            if (y == i){
+            if (y == i) {
                 return atual.getConteudo();
             }
             atual = atual.getProximo();
@@ -121,15 +130,15 @@ public class Lista<T> implements List {
 
     @Override
     public Object set(int i, Object e) {
-        if (i < 0){
+        if (i < 0) {
             return null;
         }
 
         T conteudo;
         Node<T> atual = primeiro;
 
-        for (int y = 0; y < this.size(); y++){
-            if (y == i){
+        for (int y = 0; y < this.size(); y++) {
+            if (y == i) {
                 conteudo = atual.getConteudo();
                 atual.setConteudo((T) e);
                 return conteudo;
@@ -149,22 +158,27 @@ public class Lista<T> implements List {
     @Override
     public Object remove(int i) {
         int j = 0;
-        Node<T> atual    = this.primeiro;
+        Node<T> atual = this.primeiro;
         Node<T> anterior = null;
 
         while (atual != null) {
             if (i == j) {
-                if (i == 0) this.primeiro = atual.getProximo();
-                else anterior.setProximo(atual.getProximo());
+                if (i == 0) {
+                    this.primeiro = atual.getProximo();
+                } else {
+                    anterior.setProximo(atual.getProximo());
+                }
 
-                if (atual == this.ultimo) this.ultimo = anterior;
+                if (atual == this.ultimo) {
+                    this.ultimo = anterior;
+                }
 
                 this.tamanho--;
                 return atual.getConteudo();
             }
 
             anterior = atual;
-            atual    = anterior.getProximo();
+            atual = anterior.getProximo();
             j++;
         }
 
