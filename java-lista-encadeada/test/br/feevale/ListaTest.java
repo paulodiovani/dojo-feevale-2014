@@ -169,4 +169,22 @@ public class ListaTest {
 
         assertEquals(1, listaStr.size());
     }
+
+    @Test
+    public void itMakesAnArray() {
+        listaInt.add(0);
+        listaInt.add(1);
+        listaInt.add(2);
+        listaInt.add(3);
+
+        Object[] arr = listaInt.toArray();
+
+        //array size must be equal to list size
+        assertEquals(listaInt.size(), arr.length);
+
+        //they must have the same contents
+        for (Integer i = 0; i <= listaInt.size(); i++) {
+            assertEquals(listaInt.get(i), arr[i]);
+        }
+    }
 }
