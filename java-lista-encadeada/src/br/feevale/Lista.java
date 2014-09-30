@@ -72,8 +72,8 @@ public class Lista<T> implements List {
     @Override
     public boolean remove(Object o) {
         for(int cnt = 0; cnt < this.size(); cnt++) {
-            if(this.get(cnt).toString().equals(o)){
-                this.remove(o);
+            if(this.get(cnt) == o){
+                this.remove(cnt);
                 return true;
             }
         }

@@ -3,6 +3,8 @@ package br.feevale;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 public class ListaTest {
@@ -103,6 +105,40 @@ public class ListaTest {
 
         Integer bar = 125;
         listaInt.add(bar);
-        assertFalse(listaInt.contains(bar));
+        assertTrue(listaInt.contains(bar));
+    }
+
+    @Test
+    public void itRemoveItems() {
+        String foo = "Foo";
+        listaStr.add(foo);
+        assertTrue(listaStr.remove(foo));
+        assertEquals(0, listaStr.size());
+
+        Integer bar = 125;
+        listaInt.add(bar);
+        assertTrue(listaInt.remove(bar));
+        assertEquals(0, listaInt.size());
+    }
+
+    @Test
+    public void itIterateOverElements() {
+        listaStr.add("Item 0");
+        listaStr.add("Item 1");
+        listaStr.add("Item 2");
+        listaStr.add("Item 3");
+        listaStr.add("Item 4");
+
+        Iterator itr = listaStr.iterator();
+        assertTrue(itr instanceof Iterator);
+
+        Integer i = 0; //para compara no loop
+        while (itr.hasNext()) {
+            String next = (String) itr.next();
+            String item = (String) listaStr.get(i);
+
+            assertEquals(item, next); //must be the same
+            i++;
+        }
     }
 }
