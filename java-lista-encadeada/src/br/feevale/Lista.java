@@ -6,10 +6,7 @@
 
 package br.feevale;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class Lista<T> implements List {
 
@@ -84,7 +81,14 @@ public class Lista<T> implements List {
 
     @Override
     public Object[] toArray() {
-        return (Object[]) this.toArray();
+        ArrayList<T> arr = new ArrayList<T>();
+        Iterator itr = this.iterator();
+
+        while (itr.hasNext()) {
+            arr.add((T) itr.next());
+        }
+
+        return arr.toArray();
     }
 
     @Override

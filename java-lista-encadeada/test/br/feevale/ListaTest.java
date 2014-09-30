@@ -183,7 +183,7 @@ public class ListaTest {
         assertEquals(listaInt.size(), arr.length);
 
         //they must have the same contents
-        for (Integer i = 0; i <= listaInt.size(); i++) {
+        for (Integer i = 0; i < listaInt.size(); i++) {
             assertEquals(listaInt.get(i), arr[i]);
         }
     }
