@@ -30,7 +30,7 @@ public class Lista<T> implements List {
     @Override
     public boolean contains(Object o) {
         for(int cnt = 0; cnt < this.size(); cnt++) {
-            if(this.get(cnt).toString().equals(o)){
+            if(this.get(cnt) == o){
                 return true;
             }
         }
@@ -65,6 +65,7 @@ public class Lista<T> implements List {
 
         ultimo = nodo;
         this.tamanho++;
+
         return true;
     }
 

@@ -12,6 +12,7 @@
 hs_err_pid*
 
 # Build folder and IDE settings
+build/
 build.xml
 classes
 manifest.mf

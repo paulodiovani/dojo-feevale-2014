@@ -6,90 +6,103 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ListaTest {
-    private Lista<String> lista;
+    private Lista<String> listaStr;
+    private Lista<Integer> listaInt;
 
     @Before
     public void setUp() {
-        this.lista = new Lista<String>();
+        this.listaStr = new Lista<String>();
+        this.listaInt = new Lista<Integer>();
     }
 
     @Test
     public void itIsEmpty() {
-        assertTrue(lista.isEmpty());
+        assertTrue(listaStr.isEmpty());
     }
 
     @Test
     public void itHasSize() {
-        assertEquals(0, lista.size());
+        assertEquals(0, listaStr.size());
 
-        lista.add("Foo bar");
-        assertEquals(1, lista.size());
+        listaStr.add("Foo bar");
+        assertEquals(1, listaStr.size());
 
-        lista.add("Person 1");
-        lista.add("Person 2");
-        lista.add("Person 3");
-        assertEquals(4, lista.size());
+        listaStr.add("Person 1");
+        listaStr.add("Person 2");
+        listaStr.add("Person 3");
+        assertEquals(4, listaStr.size());
     }
 
     @Test
     public void itIsNotEmpty() {
-        lista.add("Foo bar");
-        assertFalse(lista.isEmpty());
+        listaStr.add("Foo bar");
+        assertFalse(listaStr.isEmpty());
     }
 
     @Test
     public void itClearsOut() {
-        lista.add("Foo bar");
-        lista.add("Foo bar");
+        listaStr.add("Foo bar");
+        listaStr.add("Foo bar");
 
-        lista.clear();
-        assertTrue(lista.isEmpty());
+        listaStr.clear();
+        assertTrue(listaStr.isEmpty());
     }
 
     @Test
     public void itGetsWhatIsGiven() {
-        lista.add("Person 1");  //0
-        lista.add("Person 2");  //1
-        lista.add("Person 3");  //2
+        listaStr.add("Person 1");  //0
+        listaStr.add("Person 2");  //1
+        listaStr.add("Person 3");  //2
 
-        assertEquals("Person 1", lista.get(0));
-        assertEquals("Person 2", lista.get(1));
-        assertEquals("Person 3", lista.get(2));
+        assertEquals("Person 1", listaStr.get(0));
+        assertEquals("Person 2", listaStr.get(1));
+        assertEquals("Person 3", listaStr.get(2));
     }
 
     @Test
     public void itRemoves() {
-        lista.add("Person 1");  //0
-        lista.add("Person 2");  //1
-        lista.add("Person 3");  //2
+        listaStr.add("Person 1");  //0
+        listaStr.add("Person 2");  //1
+        listaStr.add("Person 3");  //2
 
-        assertEquals(3, lista.size());
+        assertEquals(3, listaStr.size());
 
-        lista.remove(0);
-        assertEquals(2, lista.size());
+        listaStr.remove(0);
+        assertEquals(2, listaStr.size());
 
-        lista.remove(1);
-        assertEquals(1, lista.size());
+        listaStr.remove(1);
+        assertEquals(1, listaStr.size());
     }
 
     @Test
     public void itReturnsWhatRemoves() {
-        lista.add("Person 1");  //0
-        lista.add("Person 2");  //1
+        listaStr.add("Person 1");  //0
+        listaStr.add("Person 2");  //1
 
-        assertEquals("Person 2", lista.remove(1));
+        assertEquals("Person 2", listaStr.remove(1));
     }
 
     @Test
     public void itChangeContent() {
-        lista.add("Person 1");  //0
-        lista.add("Person 2");  //1
-        lista.add("Person 3");  //2
+        listaStr.add("Person 1");  //0
+        listaStr.add("Person 2");  //1
+        listaStr.add("Person 3");  //2
 
-        lista.set(1, "Person 2 is gone");
-        assertEquals("Person 2 is gone", lista.get(1));
+        listaStr.set(1, "Person 2 is gone");
+        assertEquals("Person 2 is gone", listaStr.get(1));
 
-        lista.set(0, "Person 1 is gone too");
-        assertEquals("Person 1 is gone too", lista.get(0));
+        listaStr.set(0, "Person 1 is gone too");
+        assertEquals("Person 1 is gone too", listaStr.get(0));
+    }
+
+    @Test
+    public void itContainsItems() {
+        String foo = "Foo";
+        listaStr.add(foo);
+        assertTrue(listaStr.contains(foo));
+
+        Integer bar = 125;
+        listaInt.add(bar);
+        assertFalse(listaInt.contains(bar));
     }
 }
