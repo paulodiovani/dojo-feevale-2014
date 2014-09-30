@@ -111,13 +111,17 @@ public class ListaTest {
     @Test
     public void itRemoveItems() {
         String foo = "Foo";
+        String bar = "Bar";
         listaStr.add(foo);
-        assertTrue(listaStr.remove(foo));
-        assertEquals(0, listaStr.size());
+        listaStr.add(bar);
+        assertEquals(2, listaStr.size());
 
-        Integer bar = 125;
-        listaInt.add(bar);
-        assertTrue(listaInt.remove(bar));
+        assertTrue(listaStr.remove(foo));
+        assertEquals(1, listaStr.size());
+
+        Integer baz = 125;
+        listaInt.add(baz);
+        assertTrue(listaInt.remove(baz));
         assertEquals(0, listaInt.size());
     }
 
@@ -135,10 +139,34 @@ public class ListaTest {
         Integer i = 0; //para compara no loop
         while (itr.hasNext()) {
             String next = (String) itr.next();
-            String item = (String) listaStr.get(i);
+            String item = (String) listaStr.get(i);  //próximo
 
             assertEquals(item, next); //must be the same
             i++;
         }
+    }
+
+    @Test
+    public void itRemovesFromIterator() {
+        Boolean exceptionThrown = false;
+
+        listaStr.add("Item 0");
+        listaStr.add("Item 1");
+
+        Iterator itr = listaStr.iterator();
+
+        try {
+            itr.remove();
+        } catch (IllegalStateException e) {
+            assertTrue(e instanceof IllegalStateException);
+            exceptionThrown = true;
+        }
+
+        assertTrue(exceptionThrown);
+
+        itr.next();
+        itr.remove();
+
+        assertEquals(1, listaStr.size());
     }
 }

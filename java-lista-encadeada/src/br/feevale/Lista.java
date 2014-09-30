@@ -13,6 +13,46 @@ import java.util.ListIterator;
 
 public class Lista<T> implements List {
 
+    /**
+     * Classe privada para retornar um Iterator
+     * @param <T>
+     */
+    private class IteratorForLista<T> implements Iterator {
+        private Lista<T> lista;
+        private Node<T> current = null;
+        private Node<T> next    = null;
+
+        public IteratorForLista(Lista<T> lista) {
+            this.lista = lista;
+            this.next  = this.lista.primeiro;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (this.next == null) {
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        public Object next() {
+            this.current = next;
+            next = current.getProximo();
+            return current.getConteudo();
+        }
+
+        @Override
+        public void remove() {
+            if (this.current == null) {
+                throw new IllegalStateException();
+            }
+
+            this.lista.remove(this.current.getConteudo());
+            this.current = null;
+        }
+    }
+
     private Node<T> primeiro = null;
     private Node<T> ultimo = null;
     private int tamanho = 0;
@@ -39,7 +79,7 @@ public class Lista<T> implements List {
 
     @Override
     public Iterator iterator() {
-        return (Iterator) this;
+        return new IteratorForLista<T>(this);
     }
 
     @Override
